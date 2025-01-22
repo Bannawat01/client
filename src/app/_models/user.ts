@@ -20,4 +20,6 @@ export interface User {
     //todo:like feature
     followers: User[] | String[]
     following: User[] | String[]
+
+    password?: string
 }

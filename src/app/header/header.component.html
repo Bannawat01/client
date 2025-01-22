@@ -8,7 +8,7 @@
     <span>Tinner</span>
   </button>
 
-  <button
+  <!-- <button
     routerLink="/members"
     routerLinkActive="active"
     ariaCurrentWhenActive="page"
@@ -22,11 +22,37 @@
     ariaCurrentWhenActive="page"
   >
     <span>XYZ</span>
-  </button>
+  </button> -->
   <!-- <span>My App</span> -->
-  <span class="my-spacer"></span>
+
+  @if (user === undefined) {
   <button routerLink="/login">
     <mat-icon>login</mat-icon>
     <span>Login</span>
   </button>
+  } @if (user() ){
+  <button>
+    <span>Follower</span>
+  </button>
+  <button>
+    <span>Following</span>
+  </button>
+
+  <span class="my-spacer"></span>
+
+  <button mat-button [matMenuTriggerFor]="menu">
+    {{ user()?.display_name }}
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>manage_accounts</mat-icon>
+      Profile
+    </button>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+
+  }
 </mat-toolbar>
