@@ -5,15 +5,14 @@ import { NgxSpinnerService } from 'ngx-spinner'
   providedIn: 'root'
 })
 export class LoadingService {
-  loadingRequestsCount = 0
+  private loadingCount = 0;
 
   private spinner = inject(NgxSpinnerService)
-  constructor() {
 
-  }
 
   loading() {
-    this.loadingRequestsCount++
+    this.loadingCount++
+    console.log('Loading started, count:', this.loadingCount)
     this.spinner.show(undefined, {
       type: "fire",
       bdColor: 'rgba(100, 24, 215, 0.8)',
@@ -23,9 +22,9 @@ export class LoadingService {
   }
 
   idle() {
-    this.loadingRequestsCount--
-    if (this.loadingRequestsCount < 0) {
-      this.loadingRequestsCount = 0
+    this.loadingCount = Math.max(0, this.loadingCount - 1)
+    console.log('Loading stopped, count:', this.loadingCount)
+    if (this.loadingCount === 0) {
       this.spinner.hide()
     }
   }

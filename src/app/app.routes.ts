@@ -16,20 +16,23 @@ export const routes: Routes = [
         loadComponent: () => import('./server-error/server-error.component').then(c => c.ServerErrorComponent)
     },
     {
-        path: 'members',
+        path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [authGuard],
         children: [
             {
-                path: 'members',
+                path: 'member',
                 loadComponent: () => import('./member/member.component').then(c => c.MemberComponent)
-            },
-            {
+
+            }, {
                 path: 'profile',
                 loadComponent: () => import('./profile/profile.component').then(c => c.ProfileComponent)
             }
-        ],
-        loadComponent: () => import('./member/member.component').then(c => c.MemberComponent)
+        ]
+    },
+    {
+        path: 'profile',
+        loadComponent: () => import('./profile/profile.component').then(c => c.ProfileComponent)
     },
     {
         path: '404',
@@ -37,7 +40,6 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        pathMatch: 'full',
         loadComponent: () => import('./not-found/not-found.component').then(c => c.NotFoundComponent)
     },
 ]
