@@ -7,30 +7,20 @@
   >
     <span>Tinner</span>
   </button>
-
-  <!-- <button
-    routerLink="/members"
-    routerLinkActive="active"
-    ariaCurrentWhenActive="page"
-  >
-    <span>Members</span>
+  <!-- <button routerLink="/members" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <span>Members</span>
   </button>
-
-  <button
-    routerLink="/404"
-    routerLinkActive="active"
-    ariaCurrentWhenActive="page"
-  >
-    <span>XYZ</span>
+  <button routerLink="/server-error" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <span>XYZ</span>
   </button> -->
-  <!-- <span>My App</span> -->
 
-  @if (user === undefined) {
+  @if (user()===undefined) {
+  <span class="my-spacer"></span>
   <button routerLink="/login">
     <mat-icon>login</mat-icon>
     <span>Login</span>
   </button>
-  } @if (user() ){
+  } @if(user()){
   <button>
     <span>Follower</span>
   </button>
@@ -39,7 +29,6 @@
   </button>
 
   <span class="my-spacer"></span>
-
   <button mat-button [matMenuTriggerFor]="menu">
     {{ user()?.display_name }}
   </button>
@@ -53,6 +42,5 @@
       <span>Logout</span>
     </button>
   </mat-menu>
-
   }
 </mat-toolbar>
