@@ -7,13 +7,14 @@ import { FormsModule, NgForm } from '@angular/forms'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSelectModule } from '@angular/material/select'
+import { PhotoComponent } from "./photo/photo.component"
 
 
 @Component({
   selector: 'app-profile',
-  imports: [MatTabsModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrl: './profile.component.scss',
+  imports: [PhotoComponent, MatTabsModule, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule],
 })
 export class ProfileComponent {
   private accountService = inject(AccountService)

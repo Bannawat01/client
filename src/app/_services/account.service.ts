@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { User } from '../_models/user'
 import { firstValueFrom } from 'rxjs'
 import { parseUserPhoto } from '../_helper/helper'
+import { Photo } from '../_models/photo'
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,8 @@ export class AccountService {
   constructor() {
     this.loadDataFromLocalStorage()
   }
+
+
 
   //#region login and register
   logout() {
@@ -88,4 +91,73 @@ export class AccountService {
     return true
   }
   // #endregion
+
+  //#region upload photo
+  async setAvatar(photo_id: string): Promise<void> {
+    const url = environment.baseUrl + 'api/photo/' + photo_id
+    try {
+      const response = this._http.patch(url, {})
+      await firstValueFrom(response)
+      const user = this.data()!.user
+      if (user) {
+        const photos = user.photos?.map(p => {
+          p.is_avatar = p.id === photo_id
+          return p
+        })
+
+        user.photos = photos
+        const coppyData = this.data()
+        if (coppyData)
+          coppyData.user = user
+        this.data.set(coppyData)
+        this.saveDataToLocalStorage()
+      }
+    } catch (error) {
+
+    }
+  }
+  async deletePhoto(photo_id: string): Promise<void> {
+    const url = environment.baseUrl + 'api/photo/' + photo_id
+    const response = this._http.delete(url)
+    await firstValueFrom(response)
+    const user = this.data()!.user
+    if (user) {
+      const photos = user.photos?.filter(p => p.id !== photo_id)
+      user.photos = photos
+      const coppyData = this.data()
+      if (coppyData)
+        coppyData.user = user
+      this.data.set(coppyData)
+      this.saveDataToLocalStorage()
+    }
+  }
+
+  async uploadPhoto(file: File): Promise<boolean> {
+    const url = environment.baseUrl + 'api/photo/' //todo: api/photo
+    const formData = new FormData()
+    formData.append('file', file) //todo: file by server photo.controller
+
+    try {
+      const response = this._http.post<Photo>(url, formData)
+      const photo = await firstValueFrom(response)
+      const user = this.data()!.user
+      if (user) {
+        if (!user.photos)
+          user.photos = []
+        user.photos?.push(photo)
+        //update user data in local storage
+        const coppyData = this.data()
+        if (coppyData)
+          coppyData.user = user
+        this.data.set(coppyData)
+        this.saveDataToLocalStorage()
+        return true
+      }
+    } catch (error) {
+
+    }
+    return false
+  }
+  // #endregion
+
 }
