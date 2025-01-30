@@ -9,6 +9,7 @@ import { UploadPhotoComponent } from '../../_dialogs/upload-photo/upload-photo.c
 import { AccountService } from '../../_services/account.service'
 import { TimeagoClock, TimeagoCustomFormatter, TimeagoDefaultClock, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago'
 import { strings as engString } from 'ngx-timeago/language-strings/en.js'
+import { strings as japString } from 'ngx-timeago/language-strings/ja.js'
 
 // @Injectable() // This is a decorator that marks a class as available to be provided and injected as a dependency.
 // class MyIntl extends TimeagoIntl { }
@@ -30,7 +31,8 @@ export class PhotoComponent {
   user = input.required<User>()
 
   constructor(private intl: TimeagoIntl) {
-    this.intl.strings = engString
+    // this.intl.strings = engString
+    this.intl.strings = japString
     this.intl.changes.next()
   }
 
