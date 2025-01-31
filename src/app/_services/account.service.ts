@@ -106,11 +106,7 @@ export class AccountService {
         })
 
         user.photos = photos
-        const coppyData = this.data()
-        if (coppyData)
-          coppyData.user = user
-        this.data.set(coppyData)
-        this.saveDataToLocalStorage()
+        this.setUser(user)
       }
     } catch (error) {
 
@@ -124,18 +120,14 @@ export class AccountService {
     if (user) {
       const photos = user.photos?.filter(p => p.id !== photo_id)
       user.photos = photos
-      const coppyData = this.data()
-      if (coppyData)
-        coppyData.user = user
-      this.data.set(coppyData)
-      this.saveDataToLocalStorage()
+      this.setUser(user)
     }
   }
 
   async uploadPhoto(file: File): Promise<boolean> {
-    const url = environment.baseUrl + 'api/photo/' //todo: api/photo
+    const url = environment.baseUrl + 'api/photo/'
     const formData = new FormData()
-    formData.append('file', file) //todo: file by server photo.controller
+    formData.append('file', file)
 
     try {
       const response = this._http.post<Photo>(url, formData)
@@ -145,18 +137,21 @@ export class AccountService {
         if (!user.photos)
           user.photos = []
         user.photos?.push(photo)
-        //update user data in local storage
-        const coppyData = this.data()
-        if (coppyData)
-          coppyData.user = user
-        this.data.set(coppyData)
-        this.saveDataToLocalStorage()
+        this.setUser(user)
         return true
       }
     } catch (error) {
 
     }
     return false
+  }
+
+  private setUser(user: User) {
+    const coppyData = this.data()
+    if (coppyData)
+      coppyData.user = user
+    this.data.set(coppyData)
+    this.saveDataToLocalStorage()
   }
   // #endregion
 

@@ -1,3 +1,4 @@
+import { QueryPagination, UserQueryPagination } from "../_models/pagination"
 import { User } from "../_models/user"
 
 const defaultAvatar = '/assets/defaulfAvatar.png'
@@ -24,4 +25,25 @@ export function parseUserPhoto(user: User): User {
     user.avatar = getAvatar(user)
     user.photoOfTheDay = getPhotoOftheDay(user)
     return user
+}
+
+export function parseQuery(query: QueryPagination | UserQueryPagination): string {
+    let queryString = '?'
+    if (query.pageSize)
+        queryString += `&pageSize=${query.pageSize}`
+    if (query.currentPage)
+        queryString += `&currentPage=${query.currentPage}`
+
+    if ('username' in query && query.username)
+        queryString += `&currentPage=${query.username}`
+    if ('username' in query && query.looking_for)
+        queryString += `&currentPage=${query.looking_for}`
+
+    if ('username' in query && query.min_age)
+        queryString += `&currentPage=${query.min_age}`
+    if ('username' in query && query.max_age)
+        queryString += `&currentPage=${query.max_age}`
+
+
+    return queryString
 }
