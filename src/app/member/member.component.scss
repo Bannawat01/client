@@ -1,0 +1,142 @@
+.member-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+
+    // Styling for the accordion/search panel
+    mat-accordion {
+        margin-bottom: 30px;
+
+        mat-expansion-panel {
+            background-color: #f8f9fa;
+
+            mat-expansion-panel-header {
+                mat-panel-title {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                }
+            }
+
+            form {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                padding: 20px 0;
+
+                mat-form-field {
+                    width: 100%;
+                }
+
+                // Button container
+                &:after {
+                    content: "";
+                    grid-column: 1 / -1;
+                }
+
+                button {
+                    margin-right: 10px;
+                    min-width: 100px;
+
+                    &[type="submit"] {
+                        background-color: #007bff;
+                        color: white;
+                    }
+
+                    &[type="button"] {
+                        background-color: #6c757d;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+
+    // Update member cards layout
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 20px 0;
+        max-width: 800px;
+        margin: 0 auto;
+
+        >* {
+            aspect-ratio: 1;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin: 0 auto;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    // Add New Photo button style
+    .new-photo-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .member-container {
+        .cards-container {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .member-container {
+        app-member-card>* {
+            width: calc(50% - 10px);
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .member-container {
+        app-member-card>* {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .member-container {
+        padding: 0 10px;
+
+        form {
+            grid-template-columns: 1fr !important;
+        }
+    }
+}
+
+// Material form field customization
+::ng-deep {
+    .mat-form-field-appearance-outline {
+        .mat-form-field-outline {
+            background-color: white;
+            border-radius: 4px;
+        }
+    }
+
+    .mat-select-panel {
+        mat-option {
+            mat-icon {
+                margin-right: 8px;
+            }
+        }
+    }
+}
