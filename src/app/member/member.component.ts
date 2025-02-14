@@ -15,38 +15,36 @@ import { MemberCardComponent } from './member-card/member-card.component'
 
 @Component({
   selector: 'app-member',
-  imports: [MatInputModule, MatPaginatorModule, MatExpansionModule, MatInputModule, MatFormFieldModule, FormsModule, MatButtonModule, MatSelectModule, MatIcon, MemberCardComponent],
+  imports: [MemberCardComponent, MatIcon, MatSelectModule, MatButtonModule, MatPaginatorModule, MatExpansionModule, FormsModule, MatInputModule, MatFormFieldModule],
   templateUrl: './member.component.html',
   styleUrl: './member.component.scss'
 })
 export class MemberComponent implements OnInit {
-  private memberService = inject(MemberService)
-  paginator: WritableSignal<Paginator<UserQueryPagination, User>> //
+  [x: string]: any
+  private memberservice = inject(MemberService)
+  paginator: WritableSignal<Paginator<UserQueryPagination, User>>
   pageSize = default_pageSizeOption
   constructor() {
-    this.paginator = this.memberService.paginator
+    this.paginator = this.memberservice.paginator
   }
   ngOnInit(): void {
-    this.memberService.getMember()
+    this.memberservice.getMember()
   }
-
-  onPageChange(event: PageEvent) {
-    const coppyPaginator = this.paginator()
-    coppyPaginator.pagination.currentPage = event.pageIndex + 1
-    coppyPaginator.pagination.pageSize = event.pageSize
-    this.paginator.set(coppyPaginator)
-
+  onPageChnage(event: PageEvent) {
+    const copypaginator = this.paginator()
+    copypaginator.pagination.currentPage = event.pageIndex + 1
+    copypaginator.pagination.pageSize = event.pageSize
+    this.paginator.set(copypaginator)
     this.onSearch()
+
   }
 
   onSearch() {
-    this.memberService.getMember()
+    this.memberservice.getMember()
   }
-
-  onResetSearch() {
+  onReset() {
     this.paginator.set(default_paginator)
     this.onSearch()
   }
 
 }
-

@@ -1,10 +1,5 @@
 <mat-toolbar>
-  <button
-    class="home-button"
-    routerLink="/"
-    routerLinkActive="active"
-    ariaCurrentWhenActive="page"
-  >
+  <button class="home-button" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
     <span>Tinner</span>
   </button>
   <!-- <button routerLink="/members" routerLinkActive="active" ariaCurrentWhenActive="page">
@@ -21,10 +16,10 @@
     <span>Login</span>
   </button>
   } @if(user()){
-  <button>
+  <button routerLink="/followers" routerLinkActive="active">
     <span>Follower</span>
   </button>
-  <button>
+  <button routerLink="/following" routerLinkActive="active">
     <span>Following</span>
   </button>
 
