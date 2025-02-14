@@ -12,4 +12,9 @@ import { MatCardModule } from '@angular/material/card'
 })
 export class MemberCardComponent {
   member = input.required<User>()
+
+  toggleLike() {
+
+  }
 }
+

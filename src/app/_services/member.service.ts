@@ -28,6 +28,7 @@ export class MemberService {
     }
 
     console.log(`load ${category} from server`)
+
     const url = this.url + 'user/' + parseQuery(pagination)
     this.http.get<Paginator<UserQueryPagination, User>>(url).subscribe({
       next: (response) => {
