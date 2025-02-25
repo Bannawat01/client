@@ -1,8 +1,3 @@
-export interface QueryPagination {
-    pageSize?: number
-    currentPage?: number
-    length?: number
-}
 export interface UserQueryPagination extends QueryPagination {
     username?: string
     min_age?: number
@@ -10,6 +5,11 @@ export interface UserQueryPagination extends QueryPagination {
     looking_for?: string
     gender?: string
 
+}
+export interface QueryPagination {
+    pageSize?: number
+    currentPage?: number
+    length?: number
 }
 export interface Paginator<T, U> {
     pagination: T,

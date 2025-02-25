@@ -31,10 +31,11 @@ export class MemberComponent implements OnInit {
     this.memberservice.getMember()
   }
   onPageChnage(event: PageEvent) {
-    const copypaginator = this.paginator()
-    copypaginator.pagination.currentPage = event.pageIndex + 1
-    copypaginator.pagination.pageSize = event.pageSize
-    this.paginator.set(copypaginator)
+    const copyPaginator = this.paginator()
+    copyPaginator.pagination.currentPage = event.pageIndex + 1
+    copyPaginator.pagination.pageSize = event.pageSize
+    this.paginator.set(copyPaginator)
+
     this.onSearch()
 
   }
@@ -42,6 +43,7 @@ export class MemberComponent implements OnInit {
   onSearch() {
     this.memberservice.getMember()
   }
+
   onReset() {
     this.paginator.set(default_paginator)
     this.onSearch()

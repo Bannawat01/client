@@ -9,25 +9,15 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="form" autocomplete="off">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
-        <input
-          matInput
-          placeholder="username"
-          type="text"
-          (input)="updateErrorMessage('username')"
-          formControlName="username"
-        />
+        <input matInput placeholder="username" type="text" (input)="updateErrorMessage('username')"
+          formControlName="username" />
         <mat-error>{{ errorMessages.username() }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input
-          matInput
-          placeholder="password"
-          type="password"
-          (input)="updateErrorMessage('password')"
-          formControlName="password"
-        />
+        <input matInput placeholder="password" type="password" (input)="updateErrorMessage('password')"
+          formControlName="password" />
         <mat-error>{{ errorMessages.password() }}</mat-error>
       </mat-form-field>
 
@@ -35,73 +25,41 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Confirm Password</mat-label>
-        <input
-          matInput
-          placeholder="confirm password"
-          type="password"
-          (input)="updateErrorMessage('confirm_password')"
-          formControlName="confirm_password"
-        />
+        <input matInput placeholder="confirm password" type="password" (input)="updateErrorMessage('confirm_password')"
+          formControlName="confirm_password" />
         <mat-error>{{ errorMessages.confirm_password() }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Display Name</mat-label>
-        <input
-          matInput
-          placeholder="username"
-          type="text"
-          (input)="updateErrorMessage('display_name')"
-          formControlName="display_name"
-        />
+        <input matInput placeholder="username" type="text" (input)="updateErrorMessage('display_name')"
+          formControlName="display_name" />
         <mat-error>{{ errorMessages.display_name() }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Date of Birth</mat-label>
-        <input
-          matInput
-          [min]="minDate"
-          [max]="maxDate"
-          [matDatepicker]="picker"
-          formControlName="date_of_birth"
-        />
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="date_of_birth" />
         <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker
-          #picker
-          startView="year"
-          [startAt]="startDate"
-        ></mat-datepicker>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
       </mat-form-field>
 
       <div>
         <label class="example-margin">Gender:</label>
         <mat-radio-group formControlName="gender">
-          <mat-radio-button class="example-margin" value="male"
-            >Male</mat-radio-button
-          >
-          <mat-radio-button class="example-margin" value="female"
-            >Female</mat-radio-button
-          >
-          <mat-radio-button class="example-margin" value="all"
-            >LGTBQ+</mat-radio-button
-          >
+          <mat-radio-button class="example-margin" value="male">Male</mat-radio-button>
+          <mat-radio-button class="example-margin" value="female">Female</mat-radio-button>
+          <mat-radio-button class="example-margin" value="all">LGTBQ+</mat-radio-button>
         </mat-radio-group>
       </div>
 
       <div>
         <label class="example-margin">Looking for:</label>
         <mat-radio-group formControlName="looking_for">
-          <mat-radio-button class="example-margin" value="male"
-            >Male</mat-radio-button
-          >
-          <mat-radio-button class="example-margin" value="female"
-            >Female</mat-radio-button
-          >
-          <mat-radio-button class="example-margin" value="all"
-            >LGTBQ+</mat-radio-button
-          >
+          <mat-radio-button class="example-margin" value="male">Male</mat-radio-button>
+          <mat-radio-button class="example-margin" value="female">Female</mat-radio-button>
+          <mat-radio-button class="example-margin" value="all">LGTBQ+</mat-radio-button>
         </mat-radio-group>
       </div>
 

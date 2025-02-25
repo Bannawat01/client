@@ -32,7 +32,7 @@ export class MemberProfileComponent implements OnInit {
   async getMember() {
     const username = this.activeRount.snapshot.paramMap.get('username')
     if (!username) return
-    const member = await this.memberService.getMemverByUsername(username)
+    const member = await this.memberService.getMemberByUsername(username)
     if (!member) {
       this.rounter.navigate(['404'])
     } else {

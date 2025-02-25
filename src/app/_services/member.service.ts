@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http'
 import { inject, Injectable, signal } from '@angular/core'
 import { environment } from '../../environments/environment'
 import { User } from '../_models/user'
-import { cacheManager } from '../_helper/cache'
 import { Paginator, UserQueryPagination, default_paginator } from '../_models/pagination'
 import { parseQuery, parseUserPhoto } from '../_helper/helper'
 import { firstValueFrom } from 'rxjs'
+import { cacheManager } from '../_helper/cache'
 
 
-type dataCategory = 'member' | 'follower' | 'following'
+type dataCategory = 'member' | 'followers' | 'following'
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +36,7 @@ export class MemberService {
     this.http.get<Paginator<UserQueryPagination, User>>(url).subscribe({
       next: response => {
         key = cacheManager.createKey(pagination)
-        cacheManager.save(key, response, category)
+        cacheManager.save(key, category, response)
         this.paginator.set(response)
       }
     })
@@ -45,7 +45,7 @@ export class MemberService {
     this.getData('member')
   }
 
-  async getMemverByUsername(username: string): Promise<User | undefined> {
+  async getMemberByUsername(username: string): Promise<User | undefined> {
     const member = this.paginator().items.find(obj => obj.username === username)
     if (member) {
       return member
@@ -55,7 +55,7 @@ export class MemberService {
         const _member = await firstValueFrom(this.http.get<User>(url))
         return parseUserPhoto(_member)
       } catch (error) {
-        console.error('Someting Nigga member 🙎🏿‍♂️ : ', error)
+        console.error('Error fetching member: ', error)
       }
     }
     return undefined

@@ -8,7 +8,7 @@
       <form (ngSubmit)="onSearch()" #ngForm autocomplete="off">
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput type="text" name="username" [(ngModel)]="paginator().pagination.username" />
+          <input matInput type="text" name="username" [(ngModel)]="paginator().pagination.username">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -30,27 +30,26 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Min Age</mat-label>
-          <input matInput type="number" name="min_age" [(ngModel)]="paginator().pagination.min_age" />
+          <input matInput type="number" name="min_age" [(ngModel)]="paginator().pagination.min_age">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Max Age</mat-label>
-          <input matInput type="number" name="max_age" [(ngModel)]="paginator().pagination.max_age" />
+          <input matInput type="number" name="max_age" [(ngModel)]="paginator().pagination.max_age">
         </mat-form-field>
 
         <button mat-raised-button type="submit">Search</button>
-        <button mat-raised-button type="button" (click)="onReset()">
-          Reset
-        </button>
-      </form>
-    </mat-expansion-panel>
-  </mat-accordion>
+        <button mat-raised-button type="button" (click)="onReset()">Reset</button>
 
+      </form>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
   <div class="member-list">
     @for (member of paginator().items; track member.id) {
     <div class="member-item"><app-member-card [member]="member"></app-member-card></div>
     }
   </div>
-
 
 
   <mat-paginator [length]="paginator().pagination.length" [pageSize]="paginator().pagination.pageSize"
